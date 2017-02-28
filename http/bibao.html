@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+	// function sum(arr) {
+	// 	return arr.reduce(function(x,y) {
+	// 		return x+y;
+	// 	})
+	// }
+
+	// var f = sum([1,2,3,4,5]);
+	// console.log(f);
+
+	function count() {
+		var arr = [];
+		for(var i=0 ;i<=3;i++) {
+			arr.push(function() {
+				return i*i;
+			})
+		}
+	}
+
+	var results = count();
+	var f1 = results[0];
+	var f2 = results[1];
+	var f3 = results[2];
+
+
+	console.log(f1());
+	console.log(f2());
+	console.log(f3());
+
+	</script>
+</body>
+</html>

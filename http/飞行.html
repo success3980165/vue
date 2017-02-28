@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+
+	<script type="text/javascript">
+	function Flayer(fname,speed) {
+		this.fname = fname;
+		this.speed = speed;
+	}
+	Flayer.prototype.flay = function() { //方法
+		console.log(
+			this.fname+"以时速"+this.speed+"飞行")
+	}
+	function Enemy(fname,speed,score) {
+		//step1:让子类型构造函数内，借用父型构造函数
+		// Flayer(fname,speed);   //Flayer的this是window
+		Flayer.call(this,fname,speed)
+		this.score = score;
+	}
+		//step2：让子类型的原型继承父类型的原型
+	object.setprototypeOf(
+		Enemy.prototype,Flayer.prototype)
+	var dj = new Enemy("敌机"，200,10);
+	dj.flay();
+
+	</script>
+</body>
+</html>

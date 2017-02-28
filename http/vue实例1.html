@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap.css">
+</head>
+<body>
+	<div id='app'>
+		<div class="container">
+			
+			<div class='page-header'>
+				<h2 class='myCash'>我的余额：Hk$ {{ myBalance.toFixed(2) }}</h2>
+			</div>
+			<div class='wishList col-md-6'>
+				<h3>愿望清单</h3>
+				<div class="gameItem" v-for='item in wishList'>
+				    <!-- v-bind 绑定图片属性 -->
+				    <img :src="item.img">
+				    <div class="gameInfo">
+				        <h2 class="name">{{ item.name }}</h2>
+				        <p class="price">HK$ {{ item.price.toFixed(2) }}</p>
+				        <!-- v-on 监听点击事件 -->
+				        <button class="btn btn-danger btn-lg" @click='buyGame(item.id)'>立即购买</button>
+				    </div>
+				</div>
+			</div>
+			<div class="wishList col-md-6">
+				<h3>已入游戏:</h3>
+				<div class="gameItem" v-for='item in myGames'>
+					<img :src="item.img">
+					<div class="gameInfo">
+						<h2 class="name">{{ item.name }}</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script type="text/javascript" src='vue.js'></script>
+	<script type="text/javascript" src='shuju.js'></script>
+	<script type="text/javascript">
+	var app = new Vue({
+		el:'#app',
+		data:{
+			games:window.games,
+			myCash:5000
+		},
+		methods:{
+			buyGame : function(id) {
+				this.games[id].purchased = true;
+			}
+		},
+		computed:{
+			wishList: function(){
+				return this.games.filter(function(games) {
+					return !games.purchased
+				})
+			},
+			myGames: function() {
+				return this.games.filter(function(games) {
+					return games.purchased
+				})
+			},
+			myBalance:function() {
+				var sum = 0;
+				this.myGames.forEach(function(game,index){
+					sum += game.price
+				})
+				return this.myCash -sum;
+			}
+		}
+	})
+
+
+
+	</script>
+</body>
+</html>

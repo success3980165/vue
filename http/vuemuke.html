@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src='vue.js'></script>
+	<script type="text/javascript" src='vue-resource.js'></script>
+</head>
+<body>
+	
+	<h1 id='app'>
+		<ul>
+			<li v-for="item in productList">
+				<div>
+					<img v-bind:src="item.productImage" alt="">
+				</div>
+				<div>{{item.productName}}</div>
+				<div>
+					<dl>
+						<dt>赠送：</dt>
+						<dd v-for="part in item.parts" v-text="part.partsName"></dd>
+					</dl>
+				</div>
+				<div>{{item.productPrice | formatMoeny}}</div>
+				<div>
+					<input type="text" v-model="item.productQuentity" >
+				</div>
+			</br>
+				<div>{{item.productQuerntity*item.productPrice | money('元')}}</div>
+			</li>
+		</ul>
+	</h1>
+	<script type="text/javascript">
+	var app = new Vue({
+		el:'#app',
+		data:{
+			totalMoney:0,
+			productList:[],
+		},
+		filters:{
+			formatMoeny:function(value) {
+				return "￥" + value.toFixed(2)
+			}
+		},
+		mounted:function() {
+			this.createView();
+		},
+		methods: {
+			createView:function() {
+				var _this = this;
+				this.$http.get('date.json',{"id":1}).then(function(res){
+					_this.productList = res.body.result.list;
+					_this.productMoney = res.body.result.totalMoney;
+				});
+			}
+		}
+
+	})
+	Vue.filter("money",function(value,type) {
+		return "￥" + value.toFixed(2) + type
+	})
+
+
+	</script>
+</body>
+</html>

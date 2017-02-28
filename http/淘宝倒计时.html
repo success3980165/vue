@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#img{
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	
+	<div id='time'></div>
+	<div id='img'><img src="img/1.jpg" alt=""></div>
+	<script type="text/javascript">
+	window.onload = function() {
+		showTime();
+		
+	}
+	function showTime() {
+		var curtime = new Date();
+		var endtime = new Date('2016/12/24,11:38:00');
+		var lefttime = parseInt((endtime.getTime() - curtime.getTime())/1000);
+		var d = parseInt(lefttime/(24*60*60));
+		var h = parseInt(lefttime/(60*60)%24);
+		var m = parseInt(lefttime/60%60);
+		var s = parseInt(lefttime%60);
+		document.getElementById('time').innerHTML = d+'天'+h+'小时'+m+'分钟'+s+'秒';
+		if(lefttime<=0) {
+			document.getElementById('img').style.display ='block';
+			document.getElementById('time').innerHTML = '结束了'
+		}
+		setTimeout(showTime,500)
+	}
+
+	</script>
+</body>
+</html>

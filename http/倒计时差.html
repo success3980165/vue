@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id='time'></div>
+
+	<script type="text/javascript">
+		window.onload = function() {
+			var curtime = new Date();
+			var endtime = new Date('2016,12,30');
+			var lefttime = Math.ceil((endtime.getTime() - curtime.getTime())/(24*60*60*1000));
+			
+			document.getElementById('time').innerHTML = lefttime;
+		}
+
+
+
+	</script>
+</body>
+</html>

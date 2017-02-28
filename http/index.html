@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			margin: 0px;
+			padding: 0px;
+		}
+	</style>
+</head>
+<body>
+	<div id="container">
+	<img src="img/1.jpg" alt="100p神器" title="100p神器">
+	<img src="img/2.jpg" alt="100p神器" title="100p神器">
+	<img src="img/3.jpg" alt="100p神器" title="100p神器">
+	<img src="img/4.jpg" alt="100p神器" title="100p神器">
+	</div>
+	<script type="text/javascript">
+	window.onload = function() {
+		//容器对象
+		var box = document.getElementById("container");
+
+		var imgs = box.getElementsByTagName("img");
+
+		var imgWidth = imgs[0].offsetWidth;
+
+		var exposeWidth = 160;
+
+		var boxWidth = imgWidth + (imgs.length-1)*exposeWidth;
+		box.style.width = boxWidth + 'px';
+
+		for ( var i = 1,len = imgs.length; i<len; i++) {
+			imgs[i].style.left = imgWidth +exposeWidth * (i -1) + 'px'
+		}
+		setImgsPos();
+
+		var translate = imgWidth - exposeWidth;
+
+		for ( var i =0,len = imgs.length;i<len;i++) {
+
+			(function(i) {
+				imgs[i].onmouseover = function() {
+					
+				}
+			})
+
+		}
+	};
+
+
+	</script>
+</body>
+</html>
